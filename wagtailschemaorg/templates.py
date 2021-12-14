@@ -11,12 +11,12 @@ def nl(xs):
     return mark_safe('\n'.join(map(conditional_escape, xs)))
 
 
-def ld_for_site(site):
-    return nl(map(ld_print_entity, registry.get_entities(site)))
+def ld_for_site(site, request=None):
+    return nl(map(ld_print_entity, registry.get_entities(site, request)))
 
 
-def ld_for_object(obj):
-    return nl(map(ld_print_entity, obj.ld_entity_list()))
+def ld_for_object(obj, request=None):
+    return nl(map(ld_print_entity, obj.ld_entity_list(request)))
 
 
 def ld_print_entity(entity):

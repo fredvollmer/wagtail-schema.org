@@ -8,18 +8,18 @@ class Registry(object):
     def register(self, getter):
         self.items.append(getter)
 
-    def get_entities(self, site):
+    def get_entities(self, site, request=None):
         for getter in self.items:
             obj = getter(site)
             if obj is None:
                 continue
-            yield from obj.ld_entity_list()
+            yield from obj.ld_entity_list(request)
 
 
 class SiteThingLD(ThingLD):
     """A SiteThingLD can get a ThingLD instance for a wagtailcore.Site"""
 
-    def ld_get_for_site(self, site):
+    def ld_get_for_site(self, site, request=None):
         """
         Given a wagtailcore.Site, return a ThingLD instance.
         Returns None if there is no relevant instance for this site.
